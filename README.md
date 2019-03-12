@@ -1,2 +1,2 @@
 # School_VBS
-All the vbs code we ever made
+All the visual basic code we ever made
