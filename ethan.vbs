@@ -11,7 +11,7 @@ Class CustomForm
       Sub New()
       	  button1 = New Button
 	  button1.Text = "Have Some Fun!"
-	  button1.Position = New Point (10, 0)
+	  button1.Location = New Point (10, 0)
 	  Me.Controls.Add(button1)
       End Sub
    
