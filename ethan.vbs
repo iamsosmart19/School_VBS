@@ -10,11 +10,11 @@ Class CustomForm
      
       Sub New()
             button1 = New Button
-      Me.Controls.Add(button1)
+            Me.Controls.Add(button1)
       End Sub
   
       Private Sub button1_click(sender As Object, e As EventArgs) Handles button1.Click
-                MessageBox.Show("Error. System error.")
+            MessageBox.Show("Error. System error.")
       End Sub
 
       Sub Main()
