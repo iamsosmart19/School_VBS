@@ -26,6 +26,8 @@ Class CustomForm
         Dim prev As Decimal
       
         Sub New()
+            Me.Size = New Size (100, 150)
+
             numresult = 0
             results = New Label
             results.Location = New Point (10, 10)
