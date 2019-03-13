@@ -23,6 +23,7 @@ Class CustomForm
         'Dim WithEvents buttonequals As Button
         Dim results As Label
         Dim numresult As Decimal
+        Dim prev As Decimal
       
         Sub New()
             numresult = 0
@@ -30,45 +31,45 @@ Class CustomForm
             results.Location = New Point (10, 10)
         
             button7 = New Button
-            button7.Location = New Point (10, 50)
+            button7.Location = New Point (10, 40)
             button7.Text = "7"
-            button7.AutoSize = 1
+            button7.Size = New Size (20, 20)
             button8 = New Button
-            button8.Location = New Point (30, 50)
+            button8.Location = New Point (30, 40)
             button8.Text = "8"
-            button8.AutoSize = 1
+            button8.Size = New Size (20, 20)
             button9 = New Button
-            button9.Location = New Point (50, 50)
+            button9.Location = New Point (50, 40)
             button9.Text = "9"
-            button9.AutoSize = 1
+            button9.Size = New Size (20, 20)
             button4 = New Button
-            button4.Location = New Point (10, 70)
+            button4.Location = New Point (10, 60)
             button4.Text = "4"
-            button4.AutoSize = 1
+            button4.Size = New Size (20, 20)
             button5 = New Button
-            button5.Location = New Point (30, 70)
+            button5.Location = New Point (30, 60)
             button5.Text = "5"
-            button5.AutoSize = 1
+            button5.Size = New Size (20, 20)
             button6 = New Button
-            button6.Location = New Point (50, 70)
+            button6.Location = New Point (50, 60)
             button6.Text = "4"
-            button6.AutoSize = 1
+            button6.Size = New Size (20, 20)
             button1 = New Button
-            button1.Location = New Point (10, 90)
+            button1.Location = New Point (10, 80)
             button1.Text = "1"
-            button1.AutoSize = 1
+            button1.Size = New Size (20, 20)
             button2 = New Button
-            button2.Location = New Point (30, 90)
+            button2.Location = New Point (30, 80)
             button2.Text = "2"
-            button2.AutoSize = 1
+            button2.Size = New Size (20, 20)
             button3 = New Button
-            button3.Location = New Point (50, 90)
+            button3.Location = New Point (50, 80)
             button3.Text = "3"
-            button3.AutoSize = 1
+            button3.Size = New Size (20, 20)
             button0 = New Button
-            button0.Location = New Point (10, 110)
+            button0.Location = New Point (10, 100)
             button0.Text = "0"
-            button0.AutoSize = 1
+            button0.Size = New Size (20, 20)
             Me.Controls.Add(results)
             Me.Controls.Add(button0)
             Me.Controls.Add(button1)
@@ -142,8 +143,8 @@ Class CustomForm
 End Class
 
 Module Forms
-        Sub Main()
-                Dim a = New CustomForm
-                a.Main()
-        End Sub
+    Sub Main()
+        Dim a = New CustomForm
+        a.Main()
+    End Sub
 End Module
