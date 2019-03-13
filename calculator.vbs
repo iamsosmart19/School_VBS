@@ -59,7 +59,7 @@ Class CustomForm
             button5.Size = New Size (20, 20)
             button6 = New Button
             button6.Location = New Point (50, 60)
-            button6.Text = "4"
+            button6.Text = "6"
             button6.Size = New Size (20, 20)
             buttondivide = New Button
             buttondivide.Location = New Point (70, 60)
