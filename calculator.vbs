@@ -161,7 +161,19 @@ Class CustomForm
             prev = numresult
             numresult = 0
             op = "/"
-        End Sub 
+        End Sub
+
+        Private Sub buttonequals_click(sender As Object, e As EventArgs) Handles buttonequals.Click
+            If (op = "*") Then
+                numresult = prev * numresult
+                updateResults()
+            ElseIf (op = "/") Then
+                numresult = prev / numresult
+                updateResults()
+            Else
+                updateResults()
+            End If
+        End Sub
         
         Private Sub updateResults()
             results.Text = Convert.toString(numresult)
