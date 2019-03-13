@@ -16,8 +16,8 @@ Class CustomForm
         Dim WithEvents button8 As Button
         Dim WithEvents button9 As Button
         Dim WithEvents button0 As Button
-        'Dim WithEvents buttonplus As Button
-        'Dim WithEvents buttonminus As Button
+        Dim WithEvents buttonplus As Button
+        Dim WithEvents buttonminus As Button
         Dim WithEvents buttontimes As Button
         Dim WithEvents buttondivide As Button
         Dim WithEvents buttonequals As Button
@@ -25,58 +25,64 @@ Class CustomForm
         Dim numresult As Decimal
         Dim prev As Decimal
         Dim op As String
+        Dim buttonSize As Size
       
         Sub New()
             Me.Size = New Size (120, 150)
-
-            numresult = 0
+            buttonSize = New Size (20, 20)
+            Numresult = 0
             results = New Label
             results.Location = New Point (10, 10)
         
             button7 = New Button
             button7.Location = New Point (10, 40)
             button7.Text = "7"
-            button7.Size = New Size (20, 20)
+            button7.Size = buttonSize
             button8 = New Button
             button8.Location = New Point (30, 40)
             button8.Text = "8"
-            button8.Size = New Size (20, 20)
+            button8.Size = buttonSize
             button9 = New Button
             button9.Location = New Point (50, 40)
             button9.Text = "9"
-            button9.Size = New Size (20, 20)
+            button9.Size = buttonSize
             buttontimes = New Button
             buttontimes.Location = New Point (70, 40)
             buttontimes.Text = "*"
-            buttontimes.Size = New Size (20, 20)
+            buttontimes.Size = buttonSize
             button4 = New Button
             button4.Location = New Point (10, 60)
             button4.Text = "4"
-            button4.Size = New Size (20, 20)
+            button4.Size = buttonSize
             button5 = New Button
             button5.Location = New Point (30, 60)
             button5.Text = "5"
-            button5.Size = New Size (20, 20)
+            button5.Size = buttonSize
             button6 = New Button
             button6.Location = New Point (50, 60)
             button6.Text = "6"
-            button6.Size = New Size (20, 20)
+            button6.Size = buttonSize
             buttondivide = New Button
             buttondivide.Location = New Point (70, 60)
             buttondivide.Text = "/"
-            buttondivide.Size = New Size (20, 20)
+            buttondivide.Size = buttonSize
             button1 = New Button
             button1.Location = New Point (10, 80)
             button1.Text = "1"
-            button1.Size = New Size (20, 20)
+            button1.Size = buttonSize
             button2 = New Button
             button2.Location = New Point (30, 80)
             button2.Text = "2"
-            button2.Size = New Size (20, 20)
+            button2.Size = buttonSize
             button3 = New Button
             button3.Location = New Point (50, 80)
             button3.Text = "3"
-            button3.Size = New Size (20, 20)
+            button3.Size = buttonSize
+            buttonplus = New Button
+            buttonplus.Location = New Point (70, 80)
+            buttonplus.Text = "+"
+            buttonplus.Size = buttonSize
+            
             buttonequals = New Button
             buttonequals.Location = New Point (90, 80)
             buttonequals.Text = "="
@@ -84,7 +90,7 @@ Class CustomForm
             button0 = New Button
             button0.Location = New Point (10, 100)
             button0.Text = "0"
-            button0.Size = New Size (20, 20)
+            button0.Size = buttonSize
             Me.Controls.Add(results)
             Me.Controls.Add(button0)
             Me.Controls.Add(button1)
@@ -98,6 +104,7 @@ Class CustomForm
             Me.Controls.Add(button9)
             Me.Controls.Add(buttontimes)
             Me.Controls.Add(buttondivide)
+            Me.Controls.Add(buttonplus)
             Me.Controls.Add(buttonequals)
         End Sub
    
