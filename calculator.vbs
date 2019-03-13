@@ -7,24 +7,133 @@ Imports System.ComponentModel
 Class CustomForm
         Inherits Form
         Dim WithEvents button1 As Button
-        Dim textbox1 As TextBox
-        Dim textbox2 As TextBox
+        Dim WithEvents button2 As Button
+        Dim WithEvents button3 As Button
+        Dim WithEvents button4 As Button
+        Dim WithEvents button5 As Button
+        Dim WithEvents button6 As Button
+        Dim WithEvents button7 As Button
+        Dim WithEvents button8 As Button
+        Dim WithEvents button9 As Button
+        Dim WithEvents button0 As Button
+        'Dim WithEvents buttonplus As Button
+        'Dim WithEvents buttonminus As Button
+        'Dim WithEvents buttontimes As Button
+        'Dim WithEvents buttondivide As Button
+        'Dim WithEvents buttonequals As Button
+        Dim results As Label
+        Dim numresult As Decimal
       
         Sub New()
-                textbox1 = New TextBox
-                textbox1.Location = New Point (10, 10)
-                textbox2 = New TextBox
-                textbox2.Location = New Point (110, 10)
-                button1  = New Button
-                button1.Location = New Point (60, 50)
-                button1.Text = "Add!"
-                Me.Controls.Add(button1)
-                Me.Controls.Add(textbox1)
-                Me.Controls.Add(textbox2)
+            numresult = 0
+            results = New Label
+            results.Location = New Point (10, 10)
+        
+            button7 = New Button
+            button7.Location = New Point (10, 50)
+            button7.Text = "7"
+            button7.AutoSize = 1
+            button8 = New Button
+            button8.Location = New Point (30, 50)
+            button8.Text = "8"
+            button8.AutoSize = 1
+            button9 = New Button
+            button9.Location = New Point (50, 50)
+            button9.Text = "9"
+            button9.AutoSize = 1
+            button4 = New Button
+            button4.Location = New Point (10, 70)
+            button4.Text = "4"
+            button4.AutoSize = 1
+            button5 = New Button
+            button5.Location = New Point (30, 70)
+            button5.Text = "5"
+            button5.AutoSize = 1
+            button6 = New Button
+            button6.Location = New Point (50, 70)
+            button6.Text = "4"
+            button6.AutoSize = 1
+            button1 = New Button
+            button1.Location = New Point (10, 90)
+            button1.Text = "1"
+            button1.AutoSize = 1
+            button2 = New Button
+            button2.Location = New Point (30, 90)
+            button2.Text = "2"
+            button2.AutoSize = 1
+            button3 = New Button
+            button3.Location = New Point (50, 90)
+            button3.Text = "3"
+            button3.AutoSize = 1
+            button0 = New Button
+            button0.Location = New Point (10, 110)
+            button0.Text = "0"
+            button0.AutoSize = 1
+            Me.Controls.Add(results)
+            Me.Controls.Add(button0)
+            Me.Controls.Add(button1)
+            Me.Controls.Add(button2)
+            Me.Controls.Add(button3)
+            Me.Controls.Add(button4)
+            Me.Controls.Add(button5)
+            Me.Controls.Add(button6)
+            Me.Controls.Add(button7)
+            Me.Controls.Add(button8)
+            Me.Controls.Add(button9)
         End Sub
    
         Private Sub button1_click(sender As Object, e As EventArgs) Handles button1.Click
-                MessageBox.Show(Convert.toDecimal(textbox1.Text) + Convert.toDecimal(textbox2.Text))
+            numresult = numresult * 10 + 1
+            updateResults()
+        End Sub
+
+        Private Sub button2_click(sender As Object, e As EventArgs) Handles button2.Click
+            numresult = numresult * 10 + 2
+            updateResults()
+        End Sub
+
+        Private Sub button3_click(sender As Object, e As EventArgs) Handles button3.Click
+            numresult = numresult * 10 + 3
+            updateResults()
+        End Sub
+
+        Private Sub button4_click(sender As Object, e As EventArgs) Handles button4.Click
+            numresult = numresult * 10 + 4
+            updateResults()
+        End Sub
+
+        Private Sub button5_click(sender As Object, e As EventArgs) Handles button5.Click
+            numresult = numresult * 10 + 5
+            updateResults()
+        End Sub
+
+        Private Sub button6_click(sender As Object, e As EventArgs) Handles button6.Click
+            numresult = numresult * 10 + 6
+            updateResults()
+        End Sub
+
+        Private Sub button7_click(sender As Object, e As EventArgs) Handles button7.Click
+            numresult = numresult * 10 + 7
+            updateResults()
+        End Sub
+
+        Private Sub button8_click(sender As Object, e As EventArgs) Handles button8.Click
+            numresult = numresult * 10 + 8
+            updateResults()
+        End Sub
+
+        Private Sub button9_click(sender As Object, e As EventArgs) Handles button9.Click
+            numresult = numresult * 10 + 9
+            updateResults()
+        End Sub
+
+        Private Sub button0_click(sender As Object, e As EventArgs) Handles button0.Click
+            numresult = numresult * 10
+            updateResults()
+        End Sub
+        
+        Private Sub updateResults()
+                results.Text = Convert.toString(numresult)
         End Sub
 
         Sub Main()
