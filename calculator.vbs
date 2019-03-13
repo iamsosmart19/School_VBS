@@ -27,7 +27,7 @@ Class CustomForm
         Dim op As String
       
         Sub New()
-            Me.Size = New Size (150, 150)
+            Me.Size = New Size (120, 150)
 
             numresult = 0
             results = New Label
