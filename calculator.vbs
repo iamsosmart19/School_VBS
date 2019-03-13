@@ -14,9 +14,9 @@ Class CustomForm
                 textbox1 = New TextBox
                 textbox1.Location = New Point (10, 10)
                 textbox2 = New TextBox
-                textbox2.Location = New Point (40, 10)
+                textbox2.Location = New Point (110, 10)
                 button1  = New Button
-                button1.Location = New Point (25, 30)
+                button1.Location = New Point (60, 50)
                 button1.Text = "Add!"
                 Me.Controls.Add(button1)
                 Me.Controls.Add(textbox1)
