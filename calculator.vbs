@@ -18,12 +18,13 @@ Class CustomForm
         Dim WithEvents button0 As Button
         'Dim WithEvents buttonplus As Button
         'Dim WithEvents buttonminus As Button
-        'Dim WithEvents buttontimes As Button
-        'Dim WithEvents buttondivide As Button
-        'Dim WithEvents buttonequals As Button
+        Dim WithEvents buttontimes As Button
+        Dim WithEvents buttondivide As Button
+        Dim WithEvents buttonequals As Button
         Dim results As Label
         Dim numresult As Decimal
         Dim prev As Decimal
+        Dim op As String
       
         Sub New()
             Me.Size = New Size (100, 150)
@@ -44,6 +45,10 @@ Class CustomForm
             button9.Location = New Point (50, 40)
             button9.Text = "9"
             button9.Size = New Size (20, 20)
+            buttontimes = New Button
+            buttontimes.Location = New Point (70, 40)
+            buttontimes.Text = "*"
+            buttontimes.Size = New Size (20, 20)
             button4 = New Button
             button4.Location = New Point (10, 60)
             button4.Text = "4"
@@ -56,6 +61,10 @@ Class CustomForm
             button6.Location = New Point (50, 60)
             button6.Text = "4"
             button6.Size = New Size (20, 20)
+            buttondivide = New Button
+            buttondivide.Location = New Point (70, 60)
+            buttondivide.Text = "/"
+            buttondivide.Size = New Size (20, 20)
             button1 = New Button
             button1.Location = New Point (10, 80)
             button1.Text = "1"
@@ -68,6 +77,10 @@ Class CustomForm
             button3.Location = New Point (50, 80)
             button3.Text = "3"
             button3.Size = New Size (20, 20)
+            buttonequals = New Button
+            buttonequals.Location = New Point (90, 80)
+            buttonequals.Text = "="
+            buttonequals.Size = New Size (20, 40)
             button0 = New Button
             button0.Location = New Point (10, 100)
             button0.Text = "0"
@@ -83,6 +96,9 @@ Class CustomForm
             Me.Controls.Add(button7)
             Me.Controls.Add(button8)
             Me.Controls.Add(button9)
+            Me.Controls.Add(buttontimes)
+            Me.Controls.Add(buttondivide)
+            Me.Controls.Add(buttonequals)
         End Sub
    
         Private Sub button1_click(sender As Object, e As EventArgs) Handles button1.Click
