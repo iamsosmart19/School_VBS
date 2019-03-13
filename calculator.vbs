@@ -150,13 +150,25 @@ Class CustomForm
             numresult = numresult * 10
             updateResults()
         End Sub
+
+        Private Sub buttontimes_click(sender As Object, e As EventArgs) Handles buttontimes.Click
+            prev = numresult
+            numresult = 0
+            op = "*"
+        End Sub
+
+        Private Sub buttondivide_click(sender As Object, e As EventArgs) Handles buttondivide.Click
+            prev = numresult
+            numresult = 0
+            op = "/"
+        End Sub 
         
         Private Sub updateResults()
-                results.Text = Convert.toString(numresult)
+            results.Text = Convert.toString(numresult)
         End Sub
 
         Sub Main()
-                Application.Run(New CustomForm)
+            Application.Run(New CustomForm)
         End Sub
 End Class
 
