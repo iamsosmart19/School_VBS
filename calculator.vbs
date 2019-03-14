@@ -227,12 +227,16 @@ Class CustomForm
 
         Private Sub buttonclear_click(sender As Object, e As EventArgs) Handles buttonclear.Click
             numresult = 0
+            decimoff = 10
+            decilevel = 1
             updateResults()
         End Sub
 
         Private Sub buttonallclear_click(sender As Object, e As EventArgs) Handles buttonallclear.Click
             prev = 0
             numresult = 0
+            decimoff = 10
+            decilevel = 1
             updateResults()
         End Sub
 
