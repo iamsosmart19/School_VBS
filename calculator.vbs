@@ -21,6 +21,8 @@ Class CustomForm
         Dim WithEvents buttontimes As Button
         Dim WithEvents buttondivide As Button
         Dim WithEvents buttonequals As Button
+        Dim WithEvents buttonclear As Button
+        Dim WithEvents buttonallclear As Button
         Dim results As Label
         Dim numresult As Decimal
         Dim prev As Decimal
@@ -50,6 +52,10 @@ Class CustomForm
             buttontimes.Location = New Point (70, 40)
             buttontimes.Text = "*"
             buttontimes.Size = buttonSize
+            buttonclear = New Button
+            buttonclear.Location = New Point (90, 40)
+            buttonclear.Text = "C"
+            buttonclear.Size = buttonSize
             button4 = New Button
             button4.Location = New Point (10, 60)
             button4.Text = "4"
@@ -66,6 +72,10 @@ Class CustomForm
             buttondivide.Location = New Point (70, 60)
             buttondivide.Text = "/"
             buttondivide.Size = buttonSize
+            buttonallclear = New Button
+            buttonallclear.Location = New Point (90, 60)
+            buttonallclear.Text = "AC"
+            buttonallclear.Size = buttonSize
             button1 = New Button
             button1.Location = New Point (10, 80)
             button1.Text = "1"
@@ -82,7 +92,6 @@ Class CustomForm
             buttonplus.Location = New Point (70, 80)
             buttonplus.Text = "+"
             buttonplus.Size = buttonSize
-            
             buttonequals = New Button
             buttonequals.Location = New Point (90, 80)
             buttonequals.Text = "="
@@ -91,6 +100,10 @@ Class CustomForm
             button0.Location = New Point (10, 100)
             button0.Text = "0"
             button0.Size = buttonSize
+            buttonminus = New Button
+            buttonminus.Location = New Point (70, 100)
+            buttonminus.Text = "-"
+            buttonminus.Size = buttonSize
             Me.Controls.Add(results)
             Me.Controls.Add(button0)
             Me.Controls.Add(button1)
@@ -105,7 +118,10 @@ Class CustomForm
             Me.Controls.Add(buttontimes)
             Me.Controls.Add(buttondivide)
             Me.Controls.Add(buttonplus)
+            Me.Controls.Add(buttonminus)
             Me.Controls.Add(buttonequals)
+            Me.Controls.Add(buttonclear)
+            Me.Controls.Add(buttonallclear)
         End Sub
    
         Private Sub button1_click(sender As Object, e As EventArgs) Handles button1.Click
@@ -170,17 +186,43 @@ Class CustomForm
             op = "/"
         End Sub
 
+        Private Sub buttonplus_click(sender As Object, e As EventArgs) Handles buttonplus.Click
+            prev = numresult
+            numresult = 0
+            op = "+"
+        End Sub
+
+        Private Sub buttonminus_click(sender As Object, e As EventArgs) Handles buttonminus.Click
+            prev = numresult
+            numresult = 0
+            op = "-"
+        End Sub 
+        
         Private Sub buttonequals_click(sender As Object, e As EventArgs) Handles buttonequals.Click
+            Dim temp = numresult
             If (op = "*") Then
                 numresult = prev * numresult
-                updateResults()
             ElseIf (op = "/") Then
                 numresult = prev / numresult
-                updateResults()
-            Else
-                updateResults()
+            ElseIf (op = "+")
+                numresult = prev + numresult
+            ElseIf (op = "-")
+                numresult = prev - numresult
             End If
+            prev = temp
+            updateResults()
         End Sub
+
+        Private Sub buttonclear_click(sender As Object, e As EventArgs) Handles buttonclear.Click
+            numresult = 0
+            updateResults()
+        End Sub
+
+        Private Sub buttonallclear_click(sender As Object, e As EventArgs) Handles buttonallclear.Click
+            prev = 0
+            numresult = 0
+            updateResults()
+        End Sub        
         
         Private Sub updateResults()
             results.Text = Convert.toString(numresult)
