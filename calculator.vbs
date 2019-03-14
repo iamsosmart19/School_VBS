@@ -136,53 +136,43 @@ Class CustomForm
         End Sub
    
         Private Sub button1_click(sender As Object, e As EventArgs) Handles button1.Click
-            numresult = numresult * 10 + (1 * posneg)
-            updateResults()
+            numPress(1)
         End Sub
 
         Private Sub button2_click(sender As Object, e As EventArgs) Handles button2.Click
-            numresult = numresult * 10 + (2 * posneg)
-            updateResults()
+            numPress(2)
         End Sub
 
         Private Sub button3_click(sender As Object, e As EventArgs) Handles button3.Click
-            numresult = numresult * 10 + (3 * posneg)
-            updateResults()
+            numPress(3)
         End Sub
 
         Private Sub button4_click(sender As Object, e As EventArgs) Handles button4.Click
-            numresult = numresult * 10 + (4 * posneg)
-            updateResults()
+            numPress(4)
         End Sub
 
         Private Sub button5_click(sender As Object, e As EventArgs) Handles button5.Click
-            numresult = numresult * 10 + (5 * posneg)
-            updateResults()
+            numPress(5)
         End Sub
 
         Private Sub button6_click(sender As Object, e As EventArgs) Handles button6.Click
-            numresult = numresult * 10 + (6 * posneg)
-            updateResults()
+            numPress(6)
         End Sub
 
         Private Sub button7_click(sender As Object, e As EventArgs) Handles button7.Click
-            numresult = numresult * 10 + (7 * posneg)
-            updateResults()
+            numPress(7)
         End Sub
 
         Private Sub button8_click(sender As Object, e As EventArgs) Handles button8.Click
-            numresult = numresult * 10 + (8 * posneg)
-            updateResults()
+            numPress(8)
         End Sub
 
         Private Sub button9_click(sender As Object, e As EventArgs) Handles button9.Click
-            numresult = numresult * 10 + (9 * posneg)
-            updateResults()
+            numPress(9)
         End Sub
 
         Private Sub button0_click(sender As Object, e As EventArgs) Handles button0.Click
-            numresult = numresult * 10
-            updateResults()
+            numPress(0)
         End Sub
 
         Private Sub buttontimes_click(sender As Object, e As EventArgs) Handles buttontimes.Click
@@ -249,6 +239,11 @@ Class CustomForm
             results.Text = Convert.toString(numresult)
         End Sub
 
+        Private Sub numPress(number As Decimal)
+            numresult = numresult * 10 + (number * posneg)
+            updateResults()         
+        End Sub
+            
         Sub Main()
             Application.Run(New CustomForm)
         End Sub
