@@ -25,7 +25,8 @@ Class CustomForm
         Dim WithEvents buttonallclear As Button
         Dim WithEvents buttondecimal As Button
         Dim WithEvents buttonplusminus As Button
-        Dim decimode As Boolean
+        Dim decimoff As Integer
+        Dim decilevel As Decimal
         Dim posneg As Integer
         Dim results As Label
         Dim numresult As Decimal
@@ -40,7 +41,8 @@ Class CustomForm
             results = New Label
             results.Location = New Point (10, 10)
             posneg = 1
-            decimode = False
+            decimoff = 10
+            decilevel = 1
             
             button7 = New Button
             button7.Location = New Point (10, 40)
@@ -110,6 +112,10 @@ Class CustomForm
             buttonplusminus.Location = New Point (50, 100)
             buttonplusminus.Text = "±"
             buttonplusminus.Size = buttonSize
+            buttondecimal = New Button
+            buttondecimal.Location = New Point (30, 100)
+            buttondecimal.Text = "."
+            buttondecimal.Size = buttonSize
             buttonminus = New Button
             buttonminus.Location = New Point (70, 100)
             buttonminus.Text = "-"
@@ -133,6 +139,7 @@ Class CustomForm
             Me.Controls.Add(buttonclear)
             Me.Controls.Add(buttonallclear)
             Me.Controls.Add(buttonplusminus)
+            Me.Controls.Add(buttondecimal)
         End Sub
    
         Private Sub button1_click(sender As Object, e As EventArgs) Handles button1.Click
@@ -234,13 +241,21 @@ Class CustomForm
             numresult = numresult * -1
             updateResults()
         End Sub
+
+        Private Sub buttondecimal_click(sender As Object, e As EventArgs) Handles buttondecimal.Click
+            decimoff = 1
+            decilevel = 0.1
+        End Sub
         
         Private Sub updateResults()
             results.Text = Convert.toString(numresult)
         End Sub
 
         Private Sub numPress(number As Decimal)
-            numresult = numresult * 10 + (number * posneg)
+            numresult = numresult * (decimoff) + (number * posneg * decilevel)
+            If decimoff = 1
+                decilevel = decilevel / 10
+            End If
             updateResults()         
         End Sub
             
