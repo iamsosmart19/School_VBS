@@ -23,10 +23,14 @@ Class CustomForm
         Dim WithEvents buttonequals As Button
         Dim WithEvents buttonclear As Button
         Dim WithEvents buttonallclear As Button
+        Dim WithEvents buttondecimal As Button
+        Dim WithEvents buttonplusminus As Button
+        Dim decimode As Boolean
+        Dim posneg As Integer
         Dim results As Label
         Dim numresult As Decimal
         Dim prev As Decimal
-        Dim op As String
+        Dim op As Char
         Dim buttonSize As Size
       
         Sub New()
@@ -35,7 +39,9 @@ Class CustomForm
             Numresult = 0
             results = New Label
             results.Location = New Point (10, 10)
-        
+            posneg = 1
+            decimode = False
+            
             button7 = New Button
             button7.Location = New Point (10, 40)
             button7.Text = "7"
@@ -100,6 +106,10 @@ Class CustomForm
             button0.Location = New Point (10, 100)
             button0.Text = "0"
             button0.Size = buttonSize
+            buttonplusminus = New Button
+            buttonplusminus.Location = New Point (50, 100)
+            buttonplusminus.Text = "±"
+            buttonplusminus.Size = buttonSize
             buttonminus = New Button
             buttonminus.Location = New Point (70, 100)
             buttonminus.Text = "-"
@@ -122,50 +132,51 @@ Class CustomForm
             Me.Controls.Add(buttonequals)
             Me.Controls.Add(buttonclear)
             Me.Controls.Add(buttonallclear)
+            Me.Controls.Add(buttonplusminus)
         End Sub
    
         Private Sub button1_click(sender As Object, e As EventArgs) Handles button1.Click
-            numresult = numresult * 10 + 1
+            numresult = numresult * 10 + (1 * posneg)
             updateResults()
         End Sub
 
         Private Sub button2_click(sender As Object, e As EventArgs) Handles button2.Click
-            numresult = numresult * 10 + 2
+            numresult = numresult * 10 + (2 * posneg)
             updateResults()
         End Sub
 
         Private Sub button3_click(sender As Object, e As EventArgs) Handles button3.Click
-            numresult = numresult * 10 + 3
+            numresult = numresult * 10 + (3 * posneg)
             updateResults()
         End Sub
 
         Private Sub button4_click(sender As Object, e As EventArgs) Handles button4.Click
-            numresult = numresult * 10 + 4
+            numresult = numresult * 10 + (4 * posneg)
             updateResults()
         End Sub
 
         Private Sub button5_click(sender As Object, e As EventArgs) Handles button5.Click
-            numresult = numresult * 10 + 5
+            numresult = numresult * 10 + (5 * posneg)
             updateResults()
         End Sub
 
         Private Sub button6_click(sender As Object, e As EventArgs) Handles button6.Click
-            numresult = numresult * 10 + 6
+            numresult = numresult * 10 + (6 * posneg)
             updateResults()
         End Sub
 
         Private Sub button7_click(sender As Object, e As EventArgs) Handles button7.Click
-            numresult = numresult * 10 + 7
+            numresult = numresult * 10 + (7 * posneg)
             updateResults()
         End Sub
 
         Private Sub button8_click(sender As Object, e As EventArgs) Handles button8.Click
-            numresult = numresult * 10 + 8
+            numresult = numresult * 10 + (8 * posneg)
             updateResults()
         End Sub
 
         Private Sub button9_click(sender As Object, e As EventArgs) Handles button9.Click
-            numresult = numresult * 10 + 9
+            numresult = numresult * 10 + (9 * posneg)
             updateResults()
         End Sub
 
@@ -177,36 +188,40 @@ Class CustomForm
         Private Sub buttontimes_click(sender As Object, e As EventArgs) Handles buttontimes.Click
             prev = numresult
             numresult = 0
-            op = "*"
+            posneg = 1
+            op = "*"C
         End Sub
 
         Private Sub buttondivide_click(sender As Object, e As EventArgs) Handles buttondivide.Click
             prev = numresult
             numresult = 0
-            op = "/"
+            posneg = 1
+            op = "/"C
         End Sub
 
         Private Sub buttonplus_click(sender As Object, e As EventArgs) Handles buttonplus.Click
             prev = numresult
             numresult = 0
-            op = "+"
+            posneg = 1
+            op = "+"C
         End Sub
 
         Private Sub buttonminus_click(sender As Object, e As EventArgs) Handles buttonminus.Click
             prev = numresult
             numresult = 0
-            op = "-"
+            posneg = 1
+            op = "-"C
         End Sub 
         
         Private Sub buttonequals_click(sender As Object, e As EventArgs) Handles buttonequals.Click
             Dim temp = numresult
-            If (op = "*") Then
+            If (op = "*"C) Then
                 numresult = prev * numresult
-            ElseIf (op = "/") Then
+            ElseIf (op = "/"C) Then
                 numresult = prev / numresult
-            ElseIf (op = "+")
+            ElseIf (op = "+"C)
                 numresult = prev + numresult
-            ElseIf (op = "-")
+            ElseIf (op = "-"C)
                 numresult = prev - numresult
             End If
             prev = temp
@@ -222,7 +237,13 @@ Class CustomForm
             prev = 0
             numresult = 0
             updateResults()
-        End Sub        
+        End Sub
+
+        Private Sub buttonplusminus_click(sender As Object, e As EventArgs) Handles buttonplusminus.Click
+            posneg = posneg * -1
+            numresult = numresult * -1
+            updateResults()
+        End Sub
         
         Private Sub updateResults()
             results.Text = Convert.toString(numresult)
