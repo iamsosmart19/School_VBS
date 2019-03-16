@@ -4,6 +4,15 @@ Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.ComponentModel
 
+'''Summary
+'''This is a list based calculator 
+'''Wanna Know How it works?
+'''Read the code
+'''To Do List:
+'''	Make it not terrible after divisions
+'''	Add ± functionality
+'''	Maybe Add all those fancy windows buttons
+
 Public Class CustomForm
 	Inherits Form
 	'Dim declarations
@@ -44,7 +53,7 @@ Public Class CustomForm
 									CustomForm.results.Text += Me.Text
 									calcStack += Me.Text
 								End If
-							Else If calcStack.Length <= 1 Then
+							Else If calcStack.Length < 1 Then
 								CustomForm.results.Text = Me.Text
 								calcStack += Me.Text
 							Else
@@ -99,7 +108,6 @@ Public Class CustomForm
 			'System.Console.WriteLine("DB - 4")
 			Dim tempNumHolder As String = ""
 			For Each Letter As Char In calcStack
-				System.Console.WriteLine("DB - 5: {0}", Letter)
 				Select Letter
 					Case "+", "-", "*", "/", "="
 						nums(numCnt) = CDbl(tempNumHolder)
