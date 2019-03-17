@@ -270,7 +270,7 @@ End Class
 
 Module Forms
     Sub Main()
-        Dim a = New CustomForm
+        Dim a As CustomForm = New CustomForm
         a.Main()
     End Sub
 End Module
