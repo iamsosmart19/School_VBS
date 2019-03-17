@@ -9,9 +9,11 @@ Imports System.ComponentModel
 '''Wanna Know How it works?
 '''Read the code
 '''To Do List:
-'''	Make it not terrible after divisions
-'''	Add ± functionality
-'''	Maybe Add all those fancy windows buttons
+'''	Add ± functionality				
+'''	Maybe Add all those fancy windows buttons	
+'''	Add check last number function			done
+'''	prevent entering 2 signs in a row		done
+'''	Implement isOp					done
 
 Public Class CustomForm
 	Inherits Form
@@ -49,7 +51,8 @@ Public Class CustomForm
 					Case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."
 						If CustomForm.results.Text.Length < 15 Then
 							If Me.Text = "." Then
-								If calcStack.Contains(".") = False Then 
+								If getCurNum().Contains(".") = False Then 
+									System.Console.WriteLine("getCurNum: ""{0}""", getCurNum())
 									CustomForm.results.Text += Me.Text
 									calcStack += Me.Text
 								End If
@@ -64,7 +67,12 @@ Public Class CustomForm
 						End If
 					Case "/", "*", "-", "+"
 						If calcStack.Length > 0 Then  
-							calcStack += Me.Text
+							If isOp( GetChar(calcStack, calcStack.Length) )
+								System.Console.WriteLine(GetChar(calcStack, calcStack.Length))
+								calcStack = Microsoft.VisualBasic.Left(calcStack, calcStack.Length - 2) + Replace(calcStack, CStr( GetChar(calcStack, calcStack.Length) ), Me.Text , calcStack.Length - 1)
+							Else
+								calcStack += Me.Text
+							End If
 							CustomForm.results.Text = ""
 							System.Console.WriteLine(calcStack)
 						End If
@@ -97,6 +105,10 @@ Public Class CustomForm
 		End Sub
 
 		Sub EvalStack() 
+
+			If calcStack.Length = 0 Then
+				Exit Sub
+			End If
 			calcStack += Me.Text
 			Dim numsList() As Char = New Char(calcStack.Length) {}
 			'System.Console.WriteLine("DB - 1")
@@ -110,15 +122,29 @@ Public Class CustomForm
 			For Each Letter As Char In calcStack
 				Select Letter
 					Case "+", "-", "*", "/", "="
+						'If nums(1) = nums(calcStack.Length) Then
+						'	nums(1) = nums(0)
+						'End If
+						If tempNumHolder = Nothing Then
+							tempNumHolder = CStr(nums(0)) 
+						End If
+						'System.Console.WriteLine("1 {0}", tempNumHolder)
 						nums(numCnt) = CDbl(tempNumHolder)
+						'System.Console.WriteLine("2")
 						numsList(numCnt) = Letter
+						'System.Console.WriteLine("3")
 						numCnt += 1
+						'System.Console.WriteLine("4")
 						tempNumHolder = ""
+						'System.Console.WriteLine("5")
 						numsList(numCnt) = ""
+						'System.Console.WriteLine("6")
 					Case Else
 						tempNumHolder += Letter
 				End Select
+				System.Console.WriteLine("Letter: {0}", Letter)
 			Next
+			'System.Console.WriteLine("im gay")
 			For i As Decimal = 0 To numCnt
 				Select numsList(i)
 					Case "+"
@@ -131,8 +157,11 @@ Public Class CustomForm
 						nums(i + 1) = nums(i) / nums(i + 1)
 				End Select
 			Next
-			calcStack = ""
-			CustomForm.results.Text = nums(numCnt - 1) 
+			If CStr(nums(numCnt - 1)).Length < 15 Then
+				CustomForm.results.Text = CStr(nums(numCnt - 1))
+			Else
+				CustomForm.results.Text = Cstr( Math.Round( nums(numCnt - 1), 11) )
+			End If
 			System.Console.WriteLine(calcStack)
 			For Each elem As Double in nums
 				System.Console.WriteLine("nums: {0}", elem)
@@ -140,7 +169,45 @@ Public Class CustomForm
 			For Each elem As Char in numsList
 				System.Console.WriteLine("numslist: {0}", elem)
 			Next
+			'System.Console.WriteLine("getLastOperator: ""{0}""", GetChar(calcStack, getLastOperator()) )
+			'System.Console.WriteLine("getCurNum: ""{0}""", getCurNum())
+			calcStack = ""
 		End Sub
+
+		'returns the position of the last operator in the stack
+		'Loops through the stack from the right and return the operator
+		'returns 0 if there are no operators
+		Function getLastOperator() As Decimal
+			For i As Decimal = calcStack.Length To 1 Step -1
+				'System.Console.WriteLine("i: {0}", i)
+				If isOp(GetChar(calcStack, i) )
+					Return i
+				End If
+			Next
+			'This basically assumes that there are no operators
+			'And it shouldnt be called if there's nothing in the stack anyway
+			'Good programming
+			Return 0
+		End Function
+
+		'returns the last number as a string
+		Function getCurNum() As String
+			System.Console.WriteLine("getLastOperator: {0}", getLastOperator())
+			'returns
+			'the rightmost part of the stack (from the last operator)
+			'with the = removed
+			Return Microsoft.VisualBasic.Right(calcStack, calcStack.Length - getLastOperator()).Replace("=", "")
+		End Function
+
+		'returns true if the character is an operator
+		'false if it isnt
+		Function isOp(ByVal curChar As Char) As Boolean
+			If curChar >= "*"C And curChar <= "/"C And curChar <> "."
+				Return True
+			End If
+			Return False
+		End Function
+
 	End Class
 
 	Sub New()
