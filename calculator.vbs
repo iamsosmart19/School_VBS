@@ -3,6 +3,7 @@ Imports System.Windows
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.ComponentModel
+Imports System.Math  
 
 Class CustomForm
         Inherits Form
@@ -33,93 +34,21 @@ Class CustomForm
         Dim prev As Decimal
         Dim op As Char
         Dim buttonSize As Size
-      
+	Dim scale_x As Decimal
+	Dim scale_y As Decimal
+	
         Sub New()
-            Me.Size = New Size (120, 150)
-            buttonSize = New Size (20, 20)
-            Numresult = 0
+	    scale_x = 3
+	    scale_y = 3
+            Me.Size = New Size (scale_x * 120, scale_y * 150)
+            numresult = 0
             results = New Label
-            results.Location = New Point (10, 10)
             posneg = 1
             decimoff = 10
             decilevel = 1
-            
-            button7 = New Button
-            button7.Location = New Point (10, 40)
-            button7.Text = "7"
-            button7.Size = buttonSize
-            button8 = New Button
-            button8.Location = New Point (30, 40)
-            button8.Text = "8"
-            button8.Size = buttonSize
-            button9 = New Button
-            button9.Location = New Point (50, 40)
-            button9.Text = "9"
-            button9.Size = buttonSize
-            buttontimes = New Button
-            buttontimes.Location = New Point (70, 40)
-            buttontimes.Text = "*"
-            buttontimes.Size = buttonSize
-            buttonclear = New Button
-            buttonclear.Location = New Point (90, 40)
-            buttonclear.Text = "C"
-            buttonclear.Size = buttonSize
-            button4 = New Button
-            button4.Location = New Point (10, 60)
-            button4.Text = "4"
-            button4.Size = buttonSize
-            button5 = New Button
-            button5.Location = New Point (30, 60)
-            button5.Text = "5"
-            button5.Size = buttonSize
-            button6 = New Button
-            button6.Location = New Point (50, 60)
-            button6.Text = "6"
-            button6.Size = buttonSize
-            buttondivide = New Button
-            buttondivide.Location = New Point (70, 60)
-            buttondivide.Text = "/"
-            buttondivide.Size = buttonSize
-            buttonallclear = New Button
-            buttonallclear.Location = New Point (90, 60)
-            buttonallclear.Text = "AC"
-            buttonallclear.Size = buttonSize
-            button1 = New Button
-            button1.Location = New Point (10, 80)
-            button1.Text = "1"
-            button1.Size = buttonSize
-            button2 = New Button
-            button2.Location = New Point (30, 80)
-            button2.Text = "2"
-            button2.Size = buttonSize
-            button3 = New Button
-            button3.Location = New Point (50, 80)
-            button3.Text = "3"
-            button3.Size = buttonSize
-            buttonplus = New Button
-            buttonplus.Location = New Point (70, 80)
-            buttonplus.Text = "+"
-            buttonplus.Size = buttonSize
-            buttonequals = New Button
-            buttonequals.Location = New Point (90, 80)
-            buttonequals.Text = "="
-            buttonequals.Size = New Size (20, 40)
-            button0 = New Button
-            button0.Location = New Point (10, 100)
-            button0.Text = "0"
-            button0.Size = buttonSize
-            buttonplusminus = New Button
-            buttonplusminus.Location = New Point (50, 100)
-            buttonplusminus.Text = "±"
-            buttonplusminus.Size = buttonSize
-            buttondecimal = New Button
-            buttondecimal.Location = New Point (30, 100)
-            buttondecimal.Text = "."
-            buttondecimal.Size = buttonSize
-            buttonminus = New Button
-            buttonminus.Location = New Point (70, 100)
-            buttonminus.Text = "-"
-            buttonminus.Size = buttonSize
+
+            AddHandler Me.Resize, AddressOf resize
+	
             Me.Controls.Add(results)
             Me.Controls.Add(button0)
             Me.Controls.Add(button1)
@@ -141,7 +70,96 @@ Class CustomForm
             Me.Controls.Add(buttonplusminus)
             Me.Controls.Add(buttondecimal)
         End Sub
-   
+
+	Private Sub updateScreen()
+            results.Location = New Point (Floor(scale_x * 10), Floor(scale_y * 10))
+	    results.Size = New Size (Floor(110 * scale_x), Floor(scale_y * 30))
+	    Me.Font = New Font (Me.Font.FontFamily, Me.Font.Size * Floor((scale_x + scale_y)/2))
+	    buttonSize = New Size (Floor(scale_x * 20), Floor(scale_y * 20))	
+            button7 = New Button
+            button7.Location = New Point (Floor(scale_x * 10), Floor(scale_y * 40))
+            button7.Text = "7"
+            button7.Size = buttonSize
+            button8 = New Button
+            button8.Location = New Point (Floor(scale_x * 30), Floor(scale_y * 40))
+            button8.Text = "8"
+            button8.Size = buttonSize
+            button9 = New Button
+            button9.Location = New Point (Floor(scale_x * 50), Floor(scale_y * 40))
+            button9.Text = "9"
+            button9.Size = buttonSize
+            buttontimes = New Button
+            buttontimes.Location = New Point (Floor(scale_x * 70), Floor(scale_y * 40))
+            buttontimes.Text = "*"
+            buttontimes.Size = buttonSize
+            buttonclear = New Button
+            buttonclear.Location = New Point (Floor(scale_x * 90), Floor(scale_y * 40))
+            buttonclear.Text = "C"
+	    buttonclear.Size = buttonSize
+            button4 = New Button
+            button4.Location = New Point (Floor(scale_x * 10), Floor(scale_y * 60))
+            button4.Text = "4"
+            button4.Size = buttonSize
+            button5 = New Button
+            button5.Location = New Point (Floor(scale_x * 30), Floor(scale_y * 60))
+            button5.Text = "5"
+            button5.Size = buttonSize
+            button6 = New Button
+            button6.Location = New Point (Floor(scale_x * 50), Floor(scale_y * 60))
+            button6.Text = "6"
+            button6.Size = buttonSize
+            buttondivide = New Button
+            buttondivide.Location = New Point (Floor(scale_x * 70), Floor(scale_y * 60))
+            buttondivide.Text = "/"
+            buttondivide.Size = buttonSize
+            buttonallclear = New Button
+            buttonallclear.Location = New Point (Floor(scale_x * 90), Floor(scale_y * 60))
+            buttonallclear.Text = "AC"
+            buttonallclear.Size = buttonSize
+            button1 = New Button
+            button1.Location = New Point (Floor(scale_x * 10), Floor(scale_y *80))
+            button1.Text = "1"
+            button1.Size = buttonSize
+            button2 = New Button
+            button2.Location = New Point (Floor(scale_x * 30), Floor(scale_y * 80))
+            button2.Text = "2"
+            button2.Size = buttonSize
+            button3 = New Button
+            button3.Location = New Point (Floor(scale_x * 50), Floor(scale_y * 80))
+            button3.Text = "3"
+            button3.Size = buttonSize
+            buttonplus = New Button
+            buttonplus.Location = New Point (Floor(scale_x * 70), Floor(scale_y * 80))
+            buttonplus.Text = "+"
+            buttonplus.Size = buttonSize
+            buttonequals = New Button
+            buttonequals.Location = New Point (Floor(scale_x * 90), Floor(scale_y * 80))
+            buttonequals.Text = "="
+            buttonequals.Size = New Size (Floor(scale_x * 20), Floor(scale_x * 40))
+            button0 = New Button
+            button0.Location = New Point (Floor(scale_x * 10), Floor(scale_x * 100))
+            button0.Text = "0"
+            button0.Size = buttonSize
+            buttonplusminus = New Button
+            buttonplusminus.Location = New Point (Floor(scale_x * 50), Floor(scale_y * 100))
+            buttonplusminus.Text = "±"
+            buttonplusminus.Size = buttonSize
+            buttondecimal = New Button
+            buttondecimal.Location = New Point (Floor(scale_x * 30), Floor(scale_y * 100))
+            buttondecimal.Text = "."
+            buttondecimal.Size = buttonSize
+            buttonminus = New Button
+            buttonminus.Location = New Point (Floor(scale_x * 70), Floor(scale_y * 100))
+            buttonminus.Text = "-"
+            buttonminus.Size = buttonSize
+	End Sub		
+
+	Private Sub resize(sender As Object, e As EventArgs)
+	    scale_x = Me.Width/120
+	    scale_y = Me.Width/150
+	    updateScreen()
+	End Sub
+	
         Private Sub button1_click(sender As Object, e As EventArgs) Handles button1.Click
             numPress(1)
         End Sub
@@ -269,8 +287,9 @@ Class CustomForm
 End Class
 
 Module Forms
+    Dim WithEvents a As CustomForm
     Sub Main()
-        Dim a As CustomForm = New CustomForm
+        a = New CustomForm
         a.Main()
     End Sub
 End Module
