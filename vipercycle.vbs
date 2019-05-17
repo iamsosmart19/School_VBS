@@ -11,29 +11,29 @@ Public Class CustomForm
 	'	Dim WithEvents var_name As Button
 	'	Dim var_name As Decimal
 	'	Dim var_name As Label
-	Dim Boxes(0 to 3, 0 to 3) As Label
+	Dim WithEvents movingTimer As Timer
+	Dim Car As PictureBox
 
 	Sub New()
 		'define dims
-		Me.Size() = New Size (800, 900)
-		Dim BoxSize As Size = New Size (40, 40)
-
-		For i As Decimal = 0 to 3
-			For j As Decimal = 0 to 3
-				Boxes(i, j) = New Label()
-				Boxes(i, j).Location = New Point (20 + 40 * i, 20 + 40 * j)
-				Boxes(i, j).Size = BoxSize
-				Boxes(i, j).Text = "lol"
-				Me.Controls.Add(Boxes(i, j))
-			Next j
-		Next i
-
+		'Me.Size() = New Size()
 		'Me.Controls.Add(OBJECTS)
+		Car = New PictureBox()
+		Car.Image = Image.FromFile("Chicken1.jpg")
+		Car.Location = New Point (5, 5)
+		Car.AutoSize = 1
+		Me.Controls.Add(Car)
+
+		movingTimer = New Timer
+		movingTimer.Interval = 50
+		movingTimer.Start()
 	End Sub
 
 	'Private Subs
 
-	'End Sub
+	Private Sub movingTimer_tick(ByVal Sender as System.Object, ByVal e As System.EventArgs) Handles movingTimer.Tick
+		Car.Left += 2
+	End Sub
 
 	Sub Main()
 		Application.Run(New CustomForm)
