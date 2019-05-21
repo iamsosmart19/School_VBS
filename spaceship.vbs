@@ -22,6 +22,7 @@ Public Class CustomForm
 	Sub New()
 		'define dims
 		Me.Size() = New Size(600, 400)
+		Me.BackColor = Color.FromName("Navy")
 		'Me.Controls.Add(OBJECTS)
 		spaceshipI = New Bitmap("spaceship.png")
 
@@ -51,25 +52,25 @@ Public Class CustomForm
 				'Up
 				spaceshipI.RotateFlip( (4 - (spacedir - 1) ) Mod 4)
 				spacedir = 1
-				spaceship.Top -= 6
+				spaceship.Top -= 8
 
 			Case Keys.Right
 				'left
 				spaceshipI.RotateFlip( (4 - (spacedir - 2) ) Mod 4)
 				spacedir = 2
-				spaceship.Left += 6
+				spaceship.Left += 8
 
 			Case Keys.Down
 				'down
 				spaceshipI.RotateFlip( (4 - (spacedir - 3) ) Mod 4)
 				spacedir = 3
-				spaceship.Top += 6
+				spaceship.Top += 8
 
 			Case Keys.Left
 				'right
 				spaceshipI.RotateFlip( (4 - (spacedir - 4)) Mod 4)
 				spacedir = 4
-				spaceship.Left -= 6
+				spaceship.Left -= 8
 
 		End Select
 		spaceship.Image = spaceshipI
