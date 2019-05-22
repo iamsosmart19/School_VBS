@@ -22,6 +22,7 @@ Public Class CustomForm
 	Sub New()
 		'define dims
 		Me.Size() = New Size(600, 400)
+		Me.Name = "SPACE"
 		Me.BackColor = Color.FromName("Navy")
 		'Me.Controls.Add(OBJECTS)
 		spaceshipI = New Bitmap("spaceship.png")
@@ -31,7 +32,7 @@ Public Class CustomForm
 		spaceship = New PictureBox()
 		spaceship.Image = spaceshipI
 		spaceship.Location = New Point (100, 100)
-		spaceship.Size = New Size (34, 42)
+		spaceship.Size = New Size (50, 50)
 		spaceship.SizeMode = 4
 		Me.Controls.Add(spaceship)
 	End Sub
@@ -48,25 +49,25 @@ Public Class CustomForm
 		'3 270
 
 		Select Case keyData
-			Case Keys.Up
+			Case Keys.Up, Keys.W
 				'Up
 				spaceshipI.RotateFlip( (4 - (spacedir - 1) ) Mod 4)
 				spacedir = 1
 				spaceship.Top -= 8
 
-			Case Keys.Right
+			Case Keys.Right, Keys.D
 				'left
 				spaceshipI.RotateFlip( (4 - (spacedir - 2) ) Mod 4)
 				spacedir = 2
 				spaceship.Left += 8
 
-			Case Keys.Down
+			Case Keys.Down, Keys.S
 				'down
 				spaceshipI.RotateFlip( (4 - (spacedir - 3) ) Mod 4)
 				spacedir = 3
 				spaceship.Top += 8
 
-			Case Keys.Left
+			Case Keys.Left, Keys.A
 				'right
 				spaceshipI.RotateFlip( (4 - (spacedir - 4)) Mod 4)
 				spacedir = 4
