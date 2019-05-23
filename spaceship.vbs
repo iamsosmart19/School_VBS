@@ -53,28 +53,45 @@ Public Class CustomForm
 				'Up
 				spaceshipI.RotateFlip( (4 - (spacedir - 1) ) Mod 4)
 				spacedir = 1
-				spaceship.Top -= 8
+				If spaceship.Top > Me.Size.Height Then
+					spaceship.Top = Me.Size.Height
+				Else
+					spaceship.Top -= 8
+				End If
 
 			Case Keys.Right, Keys.D
 				'left
 				spaceshipI.RotateFlip( (4 - (spacedir - 2) ) Mod 4)
 				spacedir = 2
-				spaceship.Left += 8
+				If spaceship.Left > Me.Size.Width Then
+					spaceship.Left = Me.Size.Width
+				Else
+					spaceship.Left += 8
+				End If
 
 			Case Keys.Down, Keys.S
 				'down
 				spaceshipI.RotateFlip( (4 - (spacedir - 3) ) Mod 4)
 				spacedir = 3
 				spaceship.Top += 8
+				If spaceship.Top < 0 Then
+					spaceship.Top = 0
+				Else
+					spaceship.Top += 8
+				End If
 
 			Case Keys.Left, Keys.A
 				'right
 				spaceshipI.RotateFlip( (4 - (spacedir - 4)) Mod 4)
 				spacedir = 4
-				spaceship.Left -= 8
+				If spaceship.Left < 0 Then
+					spaceship.Left = 0
+				Else 
+					spaceship.Left -= 8
+				End If
 
-		End Select
-		spaceship.Image = spaceshipI
+			End Select
+			spaceship.Image = spaceshipI
 		Return MyBase.ProcessCmdKey(msg, keyData)
 	End Function
 

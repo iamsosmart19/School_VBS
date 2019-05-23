@@ -1,3 +1,7 @@
+' Distributed under the Open Source License
+' Chris Ahn
+'
+
 Imports System.Windows
 Imports System.Windows.Forms
 Imports System.Drawing

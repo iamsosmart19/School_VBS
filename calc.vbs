@@ -9,11 +9,12 @@ Imports System.ComponentModel
 '''Wanna Know How it works?
 '''Read the code
 '''To Do List:
-'''	Add ± functionality				
-'''	Maybe Add all those fancy windows buttons	
-'''	Add check last number function			done
-'''	prevent entering 2 signs in a row		done
-'''	Implement isOp					done
+'''	Show current stack in top right corner		done 19/3/19 10:30:00
+'''	Add ± functionality				done 19/3/19 10:17:20 patched 19/3/19 10:58:20
+'''	Maybe Add all those fancy windows buttons	too gay
+'''	Add check last number function			done 16/3/19
+'''	prevent entering 2 signs in a row		done 16/3/19
+'''	Implement isOp					done 17/3/19
 
 Public Class CustomForm
 	Inherits Form
@@ -26,11 +27,12 @@ Public Class CustomForm
 	Dim NumButtons(0 to 3, 0 to 4) As New ButtonNumber
 	'Dim NumButtons(0 to 14) As New Button
 	Public Shared Dim results As Label
+	Public Shared Dim curStack As Label
 	Public Shared Dim calcStack As String
-	Dim mousepos As Point
+	'Dim mousepos As Point
 	Dim prevInput As Decimal
 	Dim curInput As Decimal
-	Dim op As Char
+	'Dim op As Char
 	Dim ButtonSize As Size
 	Dim font As Font
 	'Dim WithEvents Timer1 As Timer
@@ -79,9 +81,9 @@ Public Class CustomForm
 					Case "CE"
 						If calcStack.Length > 0 Then  
 							calcStack = ""
-							CustomForm.results.Text = ""
 							System.Console.WriteLine(calcStack)
 						End If
+						CustomForm.results.Text = ""
 					Case "C"
 						If calcStack.Length > 0 Then  
 							CustomForm.results.Text = CustomForm.results.Text.Remove(CustomForm.results.Text.Length - 1)
@@ -91,7 +93,29 @@ Public Class CustomForm
 					Case "="
 						EvalStack()
 					Case "±"
+						System.Console.WriteLine("1: {0}", Microsoft.VisualBasic.Left(calcStack, getLastOperator()))
+						System.Console.WriteLine("2: {0}", Microsoft.VisualBasic.Right(calcStack, calcStack.Length - getLastOperator()))
+						If getCurNum() <> "" Then
+							If GetChar(CustomForm.results.Text, 1) = "-" Then
+								CustomForm.results.Text = Microsoft.VisualBasic.Right(CustomForm.results.Text, CustomForm.results.Text.Length - 1)
+							Else
+								CustomForm.results.Text = "-" + CustomForm.results.Text
+							End If
+							If getLastOperator() = 0
+								If GetChar(calcStack, 1) = "±"
+									calcStack = Microsoft.VisualBasic.Right(calcStack, calcStack.Length - 1)
+								Else
+									calcStack = "±" + calcStack
+								End If
+							Else If GetChar(calcStack, getLastOperator + 1) = "±" Then
+								calcStack = Microsoft.VisualBasic.Left(calcStack, getLastOperator()) + Microsoft.VisualBasic.Right(calcStack, calcStack.Length - getLastOperator() - 1)
+							Else 
+								calcStack = Microsoft.VisualBasic.Left(calcStack, getLastOperator()) + "±" + Microsoft.VisualBasic.Right(calcStack, calcStack.Length - getLastOperator())
+							End If
+						System.Console.WriteLine(calcStack)
+					End If
 				End Select
+				curStack.Text = calcStack.Replace("±", "-")
 				timeLeft = 1
 				noDub.Start()
 			End If
@@ -116,6 +140,7 @@ Public Class CustomForm
 			'System.Console.WriteLine("DB - 2")
 			Dim numCnt As Decimal = 0
 			'System.Console.WriteLine("DB - 3")
+			Dim plusMinus As Boolean = False
 			numsList (numCnt) = ""
 			'System.Console.WriteLine("DB - 4")
 			Dim tempNumHolder As String = ""
@@ -140,7 +165,11 @@ Public Class CustomForm
 						numsList(numCnt) = ""
 						'System.Console.WriteLine("6")
 					Case Else
-						tempNumHolder += Letter
+						If Letter = "±" Then
+							tempNumHolder = "-" + tempNumHolder
+						Else
+							tempNumHolder += Letter
+						End If
 				End Select
 				System.Console.WriteLine("Letter: {0}", Letter)
 			Next
@@ -224,6 +253,13 @@ Public Class CustomForm
 		results.AutoSize = 1
 		results.Font = New Font(results.Font.FontFamily, 20)
 		Me.Controls.Add(results)
+
+		curStack = New Label
+		curStack.Location = New Point (200, 10)
+		curStack.Text = ""
+		curStack.AutoSize = 1
+		'curStack.Font = New Font(results.Font.FontFamily, 14)
+		Me.Controls.Add(curStack)
 
 		For i As Decimal = 0 to 3
 			For j As Decimal = 0 to 4
@@ -318,7 +354,7 @@ End Class
 
 Module Forms
 	Sub Main() 
-		Dim MainOb As CustomForm= New CustomForm
+		Dim MainOb As CustomForm = New CustomForm
 		MainOb.Main()
 	End Sub
 End Module
