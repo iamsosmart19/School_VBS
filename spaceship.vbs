@@ -17,6 +17,10 @@ Public Class CustomForm
 	'	Dim var_name As Label
 	Dim spaceship As PictureBox
 	Dim spaceshipI As Bitmap
+	Dim i_key As Label
+	Dim j_key As Label
+	Dim k_key As Label
+	Dim m_key As Label
 	Dim spacedir As Decimal
 
 	Sub New()
@@ -29,6 +33,11 @@ Public Class CustomForm
 
 		spacedir = 1
 		
+		i_key = New Label
+		i_key.Text = "I is Up, J is Left, K is Right, and M is Down"
+		i_key.Location = New Point (400, 200)
+		Me.Controls.Add(i_key)
+
 		spaceship = New PictureBox()
 		spaceship.Image = spaceshipI
 		spaceship.Location = New Point (100, 100)
@@ -49,7 +58,7 @@ Public Class CustomForm
 		'3 270
 
 		Select Case keyData
-			Case Keys.Up, Keys.W
+			Case Keys.Up, Keys.W, Keys.I
 				'Up
 				spaceshipI.RotateFlip( (4 - (spacedir - 1) ) Mod 4)
 				spacedir = 1
@@ -59,7 +68,7 @@ Public Class CustomForm
 					spaceship.Top -= 8
 				End If
 
-			Case Keys.Right, Keys.D
+			Case Keys.Right, Keys.D, Keys.K
 				'left
 				spaceshipI.RotateFlip( (4 - (spacedir - 2) ) Mod 4)
 				spacedir = 2
@@ -69,7 +78,7 @@ Public Class CustomForm
 					spaceship.Left += 8
 				End If
 
-			Case Keys.Down, Keys.S
+			Case Keys.Down, Keys.S, Keys.M
 				'down
 				spaceshipI.RotateFlip( (4 - (spacedir - 3) ) Mod 4)
 				spacedir = 3
@@ -80,7 +89,7 @@ Public Class CustomForm
 					spaceship.Top += 8
 				End If
 
-			Case Keys.Left, Keys.A
+			Case Keys.Left, Keys.A, Keys.J
 				'right
 				spaceshipI.RotateFlip( (4 - (spacedir - 4)) Mod 4)
 				spacedir = 4
