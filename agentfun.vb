@@ -30,6 +30,11 @@ Public Class CustomForm
 		'Me.Size() = New Size()
 		'Me.Controls.Add(OBJECTS)
 		Me.Size() = New Size(600, 400)
+		
+		Dim SelectAnimation = New Label
+		SelectAnimation.Location = New Point(290, 30)
+		SelectAnimation.Text = "Select An Animation"
+		Me.Controls.Add(SelectAnimation)
 
 		Dim Say = New Button
 		Say.Location = New Point(270, 110)
