@@ -18,6 +18,8 @@ Public Class CustomForm
 	Dim WithEvents Say As Button
 	Dim WithEvents Clr As Button
 	Dim WithEvents moveto As Button
+	Dim pelican As PictureBox
+	Dim pelicanImage As Image
 	Dim SelectAnimation As Label
 	Dim X As Label
 	Dim Y As Label
@@ -30,6 +32,15 @@ Public Class CustomForm
 		'Me.Size() = New Size()
 		'Me.Controls.Add(OBJECTS)
 		Me.Size() = New Size(600, 400)
+
+		Dim tempImage As New Bitmap("pelican.jpg")
+		Dim pelicanImage = New Bitmap(tempImage, CInt(tempImage.Width/8), CInt(tempImage.Height/8))
+
+		Dim pelican = New PictureBox
+		pelican.Location = New Point(50, 100)
+		pelican.Image = pelicanImage
+		pelican.autoSize = true
+		Me.Controls.Add(pelican)
 		
 		Dim SelectAnimation = New Label
 		SelectAnimation.Location = New Point(290, 30)
@@ -64,6 +75,7 @@ Public Class CustomForm
 		
 		Dim xValue = New NumericUpDown
 		xValue.Location = New Point(270, 260)
+		xValue.Value = pelican.Left
 		Me.Controls.Add(xValue)
 
 		Dim Y = New Label
@@ -73,10 +85,27 @@ Public Class CustomForm
 		
 		Dim yValue = New NumericUpDown
 		yValue.Location = New Point(400, 260)
+		yValue.Value = pelican.Top
 		Me.Controls.Add(yValue)
 	End Sub
 
 	'Private Subs
+	Private Sub Clr_Click(Byval Sender As System.Object, ByVal e As System.EventArgs) Handles Clr.Click
+		Speech.Text = ""
+	End Sub
+
+	Private Sub Say_Click(Byval Sender As System.Object, ByVal e As System.EventArgs) Handles Say.Click
+		If Speech.Text <> "" Then
+			MsgBox(Speech.Text)
+		End If
+	End Sub
+
+	Private Sub MoveTo_Click(Byval Sender As System.Object, ByVal e As System.EventArgs) Handles moveto.Click
+		'Console.Write(Me.xValue.Value)
+		SelectAnimation.Text = CStr(Me.xValue.Value)
+		'pelican.Left = Me.xValue.Value
+		'pelican.Top = Me.yValue.Value
+	End Sub
 
 	'End Sub
 
