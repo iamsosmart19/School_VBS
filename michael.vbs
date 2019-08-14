@@ -41,7 +41,7 @@ Public Class CustomForm
 	'End Sub
 
 	Sub nextMeme_click(sender as Object, e As System.EventArgs) Handles nextMeme.Click
-		currentMeme = (currentMeme + 1) % 2
+		currentMeme = (currentMeme + 1) Mod 2
 		vsauce.Image = Image.FromFile("giphy" + currentMeme + ".gif")
 	End Sub
 
