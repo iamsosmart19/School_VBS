@@ -17,7 +17,7 @@ Public Class CustomForm
 	Dim WithEvents Say As Button
 	Dim WithEvents Clr As Button
 	Dim WithEvents moveto As Button
-	Dim pelican As PictureBox
+	Dim pelican As PctureBox
 	Dim pelicanImage As Image
 	Dim SelectAnimation As Label
 	Dim X As Label
@@ -35,7 +35,7 @@ Public Class CustomForm
 		Dim tempImage As New Bitmap("pelican.jpg")
 		Dim pelicanImage = New Bitmap(tempImage, CInt(tempImage.Width/8), CInt(tempImage.Height/8))
 
-		pelican = New PictureBox()
+		Dim pelican = New PictureBox()
 		pelican.Location = New Point(50, 100)
 		pelican.Image = pelicanImage
 		pelican.autoSize = true
@@ -101,8 +101,8 @@ Public Class CustomForm
 	End Sub
 
 	Sub MoveTo_click(sender As Object, e As System.EventArgs) Handles moveto.Click
-		pelican.Left = Me.xValue.Value
-		pelican.Top = Me.yValue.Value
+		pelican.Left = Me.yValue.Value
+		pelican.Top = Me.xValue.Value
 	End Sub
 
 	'End Sub
